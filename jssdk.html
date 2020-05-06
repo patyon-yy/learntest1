@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/core.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button id="chooseImage">点击</button>
+    <script>
+       $.ajax({
+           url:"http://1.luyao.applinzi.com/lianxi/lianxi2.php",
+           type:"post",
+           data:{
+               url:location.href.split('#')[0]
+           },
+           dataType:"json",
+           success:function(res){
+               wx.config(res)
+               wx.ready(function(){
+                $("#chooseImage").click(function(){
+                    wx.chooseImage({
+                        count: 1, // 默认9
+                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                        success: function (res) {
+                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                 }
+});
+                })
+               })
+           }
+       })
+        
+    </script>
+</body>
+</html>
